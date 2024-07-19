@@ -1,0 +1,61 @@
+- hiển thị lịch ngày sinh
+- tạo list danh sách thành phố cho client chọn trên thanh cuộn xuống
+
+<Link to={`/student-profile/${student.id}`} className='btn btn-info'><FaEye /></Link>
+<Link to={`/edit-student/${student.id}`} className='btn btn-warning'><FaEdit/></Link>
+
+backend
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RestController;
+
+import java.util.Arrays;
+import java.util.List;
+
+@RestController
+public class CityController {
+
+    @GetMapping("/cities")
+    public List<String> getCities() {
+        // Giả sử danh sách các thành phố đã được lưu trữ trong cơ sở dữ liệu hoặc được tạo ra từ nguồn dữ liệu khác
+        return Arrays.asList("Hanoi", "Ho Chi Minh City", "Danang", "Hue", "Hai Phong");
+    }
+}
+
+
+fontend
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>City Selection</title>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+</head>
+<body>
+    <select id="citySelect">
+        <option value="">Select a city</option>
+    </select>
+
+    <script>
+        $(document).ready(function() {
+            $.get("/cities", function(data) {
+                data.forEach(function(city) {
+                    $("#citySelect").append("<option value='" + city + "'>" + city + "</option>");
+                });
+            });
+        });
+    </script>
+</body>
+</html>
+
+- lỗi update mà không cho trùng email cũ
+
+*fontend
+- npx create-react-app nam;
+- npm start
+- npm i bootstrap --save
+- npm i axios 
+- npm i react-router-dom
+- npm i react-icons
+<!--liên kết giữa các route trong ứng dụng React,điều hướng giữa các thành phần mà không làm tải lại trang hoàn toàn, hỉ cập nhật phần nội dung cần thiết, giữ lại các phần của trang đã được load trước đó, và thay đổi URL để phản ánh route mới -
+- lấy thông báo lỗi từ backend hiển thị lên fontend
